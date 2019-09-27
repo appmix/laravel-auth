@@ -11,10 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function() {
+    return redirect(app()->getLocale());
 });
 
-Auth::routes();
+Route::group(['prefix' => '{locale}', 
+    'where' => ['locale' => '[a-zA-Z]{2}'],
+    'middleware' => 'setLocale',
+], function() {
+    Route::get('/', function ($locale) {
+        return view('welcome');
+    });
+    
+    Auth::routes();
+    
+    Route::get('/home', 'HomeController@index')->name('home');
+});
 
-Route::get('/home', 'HomeController@index')->name('home');

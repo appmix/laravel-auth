@@ -36,4 +36,14 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /**
+     * Override $redirectTo variable
+     *
+     * @return void
+     */
+    public function redirectTo()
+    {
+        return app()->getLocale(). '/home';
+    }
 }
