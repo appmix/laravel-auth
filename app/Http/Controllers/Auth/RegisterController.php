@@ -68,4 +68,14 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    /**
+     * Override $redirectTo variable
+     *
+     * @return void
+     */
+    public function redirectTo()
+    {
+        return app()->getLocale(). '/home';
+    }
 }
